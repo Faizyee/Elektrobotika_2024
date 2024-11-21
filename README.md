@@ -116,8 +116,9 @@ void setup() {
   analogWrite(EA, 180);  // Motor kiri depan
   analogWrite(EB, 180);  // Motor kanan depan
 
-  // Inisialisasi koneksi WebSocket dan menghubungkan dengan SSID dan password
-  control.begin("Player 1", "123456789");  // SSID: Player1, Password: 123456789
+  // Inisialisasi koneksi WebSocket dan menghubungkan dengan SSID, Password, dan Mode Access Point (true) atau Station (false)
+  control.begin("Player 1", "123456789", true);  // SSID: Player1, Password: 123456789, Mode: Access Point
+
   // Menetapkan fungsi event handler untuk menangani data yang diterima
   control.onEvent(onEventBersControl);
 }
@@ -134,4 +135,4 @@ void loop() {
 
 ### Sistem Kontrol
 
-[Buka kontrol sekarang](https://faizyee.github.io/Elektrobotika_2024)
+![Buka kontrol sekarang](https://faizyee.github.io/Elektrobotika_2024)

@@ -129,4 +129,21 @@ void loop() {
 
 ### Sistem Kontrol
 
+Data yang akan terkirim adalah:
+```json
+{
+  data: {
+    left: {
+      up: true/false,
+      down: true/false
+    },
+    right: {
+      up: true/false,
+      down: true/false
+    },
+    speed: 0-255
+  }
+}
+```
+
 [Buka kontrol sekarang](https://faizyee.github.io/Elektrobotika_2024)

@@ -33,3 +33,8 @@ Politeknik Harapan Bersama Tegal
    - bersControlV1 unduh [disini (bersControlV1)](https://github.com/Faizyee/BersControl/archive/refs/heads/main.zip)
 
 ### Pemrograman
+
+```ino
+void setup() {
+
+}

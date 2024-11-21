@@ -169,6 +169,11 @@
 
     <script>
         let ws;
+        let valuesInput;
+
+        input.addEventListener('input', function(event) {
+            valuesInput = event.currentTarget.value;
+        });
         // WebSocket initialization
         function connect() {
             var input = document.getElementById('textInput');
@@ -181,7 +186,7 @@
             }
 
             if (window.WebSocket) {
-                ws = new WebSocket("ws://" + input.value);
+                ws = new WebSocket("ws://" + valuesInput);
 
                 errorMessage.textContent = "Menghubungkan...";
                 errorMessage.style.color = "#000000";

@@ -13,7 +13,7 @@ Oleh:
 
 ### Microcontroller
 
-NodeMCU ESP8266
+#### NodeMCU ESP8266
 
 ![Microcontroller NodeMCU ESP8266](https://github.com/Faizyee/Elektrobotika_2024/blob/21933b3cb46ecc7e1ba44be218d81946012c376f/tp.png)
 

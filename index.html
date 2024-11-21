@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kontrol Aplikasi</title>
+    <style>
+        * {
+            outline: none;
+            -webkit-appearance: none;
+            appearance: none;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+            user-select: none;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f4f4f9;
+        }
+        .container {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 600px;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .column {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        .button {
+            width: 100px;
+            height: 100px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .button.active {
+            background-color: #0056b3;
+            /* Warna tombol saat ditekan */
+        }
+        .seekbar-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        .seekbar {
+            writing-mode: bt-lr;
+            -webkit-appearance: slider-vertical;
+            height: 180px;
+            width: 20px;
+        }
+        #seekbar-value {
+            font-size: 16px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="column">
+            <button class="button" id="btn-left-up">Atas</button>
+            <button class="button" id="btn-left-down">Bawah</button>
+        </div>
+        <div class="seekbar-container">
+            <input type="range" min="0" max="255" value="180" id="seekbar" class="seekbar">
+            <label id="seekbar-value">180</label>
+        </div>
+        <div class="column">
+            <button class="button" id="btn-right-up">Atas</button><button class="button" id="btn-right-down">bawah</button>
+        </div>
+    </div>
+
+    <script>
+        // WebSocket initialization
+        const ws = new WebSocket("ws://192.168.4.1:81");
+
+        ws.onopen = () => console.log("WebSocket connected.");
+        ws.onclose = () => console.log("WebSocket disconnected.");
+        ws.onerror = (error) => console.error("WebSocket error:", error);
+
+        // State for button presses
+        const buttonState = {
+            left: {
+                up: false,
+                down: false
+            },
+            right: {
+                up: false,
+                down: false
+            },
+            speed: 180,
+        };
+
+        // Update WebSocket with new state
+        function sendState() {
+            const data = {
+                data: buttonState
+            };
+            if (ws.readyState === WebSocket.OPEN) {
+                ws.send(JSON.stringify(data));
+                console.log("Sent:", data);
+            } else {
+                console.error("WebSocket is not open.");
+            }
+        }
+
+        // Seekbar handler
+        const seekbar = document.getElementById("seekbar");
+        const seekbarValue = document.getElementById("seekbar-value");
+        seekbar.addEventListener("input", () => {
+            seekbarValue.textContent = seekbar.value;
+            buttonState["speed"] = seekbar.value;
+            sendState(); // Update server when seekbar changes
+        });
+
+        // Individual button handlers
+        const btnLeftUp = document.getElementById("btn-left-up");
+        const btnLeftDown = document.getElementById("btn-left-down");
+        const btnRightUp = document.getElementById("btn-right-up");
+        const btnRightDown = document.getElementById("btn-right-down");
+
+        // Event functions
+        function handlePress(button, name, stateKey, direction) {
+            button.classList.add("active");
+            buttonState[stateKey][direction] = true;
+            console.log(`${name} pressed`);
+            sendState();
+        }
+
+        function handleRelease(button, name, stateKey, direction) {
+            button.classList.remove("active");
+            buttonState[stateKey][direction] = false;
+            console.log(`${name} released`);
+            sendState();
+        }
+
+        // Assign events to buttons
+        btnLeftUp.addEventListener("touchstart", () => handlePress(btnLeftUp, "Left Up", "left", "up"), {
+            passive: true
+        });
+        btnLeftUp.addEventListener("touchend", () => handleRelease(btnLeftUp, "Left Up", "left", "up"), {
+            passive: true
+        });
+        btnLeftUp.addEventListener("touchcancel", () => handleRelease(btnLeftUp, "Left Up", "left", "up"), {
+            passive: true
+        });
+
+        btnLeftDown.addEventListener("touchstart", () => handlePress(btnLeftDown, "Left Down", "left", "down"), {
+            passive: true
+        });
+        btnLeftDown.addEventListener("touchend", () => handleRelease(btnLeftDown, "Left Down", "left", "down"), {
+            passive: true
+        });
+        btnLeftDown.addEventListener("touchcancel", () => handleRelease(btnLeftDown, "Left Down", "left", "down"), {
+            passive: true
+        });
+
+        btnRightUp.addEventListener("touchstart", () => handlePress(btnRightUp, "Right Up", "right", "up"), {
+            passive: true
+        });
+        btnRightUp.addEventListener("touchend", () => handleRelease(btnRightUp, "Right Up", "right", "up"), {
+            passive: true
+        });
+        btnRightUp.addEventListener("touchcancel", () => handleRelease(btnRightUp, "Right Up", "right", "up"), {
+            passive: true
+        });
+
+        btnRightDown.addEventListener("touchstart", () => handlePress(btnRightDown, "Right Down", "right", "down"), {
+            passive: true
+        });
+        btnRightDown.addEventListener("touchend", () => handleRelease(btnRightDown, "Right Down", "right", "down"), {
+            passive: true
+        });
+        btnRightDown.addEventListener("touchcancel", () => handleRelease(btnRightDown, "Right Down", "right", "down"), {
+            passive: true
+        });
+    </script>
+</body>
+</html>

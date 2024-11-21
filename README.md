@@ -150,4 +150,4 @@ Data yang akan terkirim adalah:
 }
 ```
 
-[Unduh kontrol sekarang](https://github.com/Faizyee/Elektrobotika_2024/blob/ef1141d349d8bad7cdb07a99473c2a93af43f383/index.html)
+[Unduh sistem kontrol](https://raw.githubusercontent.com/Faizyee/Elektrobotika_2024/refs/heads/main/sistem_kontrol.html)

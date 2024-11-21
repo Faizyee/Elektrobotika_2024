@@ -1,6 +1,6 @@
 ![Elektrobotika 2024](https://github.com/Faizyee/Elektrobotika_2024/blob/a62c9610bb55eec299da8ea1fce67014cdcda204/fp.png)
 
-## Elektrobotika 2024
+# Elektrobotika 2024
 Workshop And Robotic Competition
 
 Oleh:
@@ -9,9 +9,9 @@ Oleh:
 
 Politeknik Harapan Bersama Tegal
 
-### Materi
+## Materi
 
-#### Instalasi
+### Instalasi
 
 1. Instal Arduino IDE
    
@@ -34,4 +34,4 @@ Politeknik Harapan Bersama Tegal
    
    - bersControlV1 instal [disini](https://github.com/Faizyee/BersControl/archive/refs/heads/main.zip)
 
-#### Bagian Utama
+### Bagian Utama

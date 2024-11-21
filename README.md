@@ -48,13 +48,11 @@ const int LF = D3;  // (IN4) Pin untuk motor kiri depan (kontrol digital)
 bersControlV1 control;  // Objek bersControlV1 untuk komunikasi WebSocket
 
 // Fungsi yang menangani event WebSocket dan data yang diterima dari client
-void onEventBersControl(const BersData& data) {
-  // Mengecek jika ID client yang mengirim adalah client pertama
-  if (data.getClientID == 0) {
+void onEventBersControl(const BersSignal& data) {
     // Mengecek jika status kode data adalah 0 (berarti data valid)
-    if (data.statusCode == 0) {
+    if (data.status.Code == 0) {
       // Mengambil data dalam format JSON dari pesan yang diterima
-      JsonDocument jsonData = data.out.typeJson;
+      JsonDocument jsonData = data.output.Json;
 
       // Mengambil status perintah untuk setiap motor dan kecepatan
       bool LF_p = jsonData["data"]["left"]["up"].as<bool>();     // Status motor kiri depan (gerak maju)
@@ -95,10 +93,6 @@ void onEventBersControl(const BersData& data) {
         digitalWrite(LB, LOW);  // Mematikan motor kiri belakang
       }
     }
-  } else {
-    // Jika client bukan client pertama (ID bukan 0), putuskan koneksi client
-    control.clientDisconnect(data.getClientID);
-  }
 }
 
 // Fungsi setup untuk inisialisasi hardware dan koneksi

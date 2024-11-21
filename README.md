@@ -133,6 +133,8 @@ void loop() {
 
 ### Sistem Kontrol
 
+[Unduh sistem kontrol](https://raw.githubusercontent.com/Faizyee/Elektrobotika_2024/refs/heads/main/sistem_kontrol.html)
+
 Data yang akan terkirim adalah:
 ```js
 {
@@ -149,5 +151,3 @@ Data yang akan terkirim adalah:
   }
 }
 ```
-
-[Unduh sistem kontrol](https://raw.githubusercontent.com/Faizyee/Elektrobotika_2024/refs/heads/main/sistem_kontrol.html)

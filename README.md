@@ -104,7 +104,6 @@ void setup() {
   pinMode(RF, OUTPUT);           // Motor kanan depan
   pinMode(LB, OUTPUT);           // Motor kiri belakang
   pinMode(LF, OUTPUT);           // Motor kiri depan
-  pinMode(LED_BUILTIN, OUTPUT);  // LED built-in untuk indikator status
 
   // Mengatur kecepatan awal kedua motor pada level 180 (range 0-255)
   analogWrite(EA, 180);  // Motor kiri depan

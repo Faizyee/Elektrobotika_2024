@@ -98,8 +98,8 @@ void onEventBersControl(const BersSignal& data) {
 // Fungsi setup untuk inisialisasi hardware dan koneksi
 void setup() {
   // Menetapkan mode pin untuk motor dan LED
-  pinMode(EA, OUTPUT);           // Motor kiri depan
-  pinMode(EB, OUTPUT);           // Motor kanan depan
+  pinMode(EA, OUTPUT);           // Motor kiri kecepatan
+  pinMode(EB, OUTPUT);           // Motor kanan kecepatan
   pinMode(RB, OUTPUT);           // Motor kanan belakang
   pinMode(RF, OUTPUT);           // Motor kanan depan
   pinMode(LB, OUTPUT);           // Motor kiri belakang
@@ -110,7 +110,8 @@ void setup() {
   analogWrite(EB, 180);  // Motor kanan depan
 
   // Inisialisasi koneksi WebSocket dan menghubungkan dengan SSID, Password, dan Mode Access Point (true) atau Station (false)
-  control.begin("Player 1", "123456789", true);  // SSID: Player1, Password: 123456789, Mode: Access Point
+  control.begin("Player 10", "123456789", true);  // SSID: Player1, Password: 123456789, Mode: Access Point
+  control.setMaxConnect(1);
 
   // Menetapkan fungsi event handler untuk menangani data yang diterima
   control.onEvent(onEventBersControl);

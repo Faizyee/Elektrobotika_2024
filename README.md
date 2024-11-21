@@ -11,6 +11,10 @@ Oleh:
 
 ## Materi
 
+### Microcontroller
+
+![Microcontroller NodeMCU ESP8266](https://images.app.goo.gl/aA1soqLw9ECKLMzb7)
+
 ### Instalasi
 
 1. Instal Arduino IDE

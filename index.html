@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kontrol Aplikasi</title>
+    <title>Elektrobotika 2024</title>
     <style>
         * {
             outline: none;
@@ -13,6 +14,7 @@
             box-shadow: none;
             user-select: none;
         }
+
         body {
             font-family: Arial, sans-serif;
             display: flex;
@@ -23,7 +25,20 @@
             margin: 0;
             background-color: #f4f4f9;
         }
-        .container {
+
+        .start-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 600px;
+            padding: 20px;
+            box-sizing: border-box;
+            gap: 10px;
+        }
+
+        .main-container {
             display: flex;
             flex-direction: row;
             align-items: center;
@@ -33,12 +48,14 @@
             padding: 20px;
             box-sizing: border-box;
         }
+
         .column {
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 10px;
         }
+
         .button {
             width: 100px;
             height: 100px;
@@ -50,30 +67,92 @@
             border-radius: 5px;
             text-align: center;
         }
+
         .button.active {
             background-color: #0056b3;
             /* Warna tombol saat ditekan */
         }
+
         .seekbar-container {
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 10px;
         }
+
         .seekbar {
             writing-mode: bt-lr;
             -webkit-appearance: slider-vertical;
             height: 180px;
             width: 20px;
         }
+
         #seekbar-value {
             font-size: 16px;
             font-weight: bold;
         }
+
+        .hidden {
+            display: none;
+        }
+
+        #btn-start {
+            width: 100px;
+            height: 40px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        #btn-start:active {
+            background-color: #0056b3;
+        }
+
+        input[type="text"] {
+            padding: 12px 20px;
+            font-size: 16px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            box-sizing: border-box;
+            text-align: center;
+            width: auto;
+            min-width: 150px;
+            max-width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        input[type="text"]:focus {
+            border-color: #5d9bfb;
+            box-shadow: 0 0 8px rgba(93, 155, 251, 0.5);
+            outline: none;
+        }
+
+        input[type="text"]::placeholder {
+            color: #aaa;
+            font-style: italic;
+            text-align: center;
+        }
+
+        .error-message {
+            color: #000000;
+            font-size: 14px;
+            margin-top: 5px;
+            text-align: center;
+        }
     </style>
 </head>
+
 <body>
-    <div class="container">
+    <div id="start" class="start-container">
+        <span id="error-message" class="error-message"></span>
+        <input type="text" id="textInput" placeholder="IP Address dan port">
+        <button id="btn-start" type="button" onclick="connect()">Mulai</button>
+    </div>
+    <div id="main" class="main-container hidden">
         <div class="column">
             <button class="button" id="btn-left-up">Atas</button>
             <button class="button" id="btn-left-down">Bawah</button>
@@ -83,19 +162,47 @@
             <label id="seekbar-value">180</label>
         </div>
         <div class="column">
-            <button class="button" id="btn-right-up">Atas</button><button class="button" id="btn-right-down">bawah</button>
+            <button class="button" id="btn-right-up">Atas</button>
+            <button class="button" id="btn-right-down">bawah</button>
         </div>
     </div>
 
     <script>
+        let ws;
         // WebSocket initialization
-        const ws = new WebSocket("ws://192.168.4.1:81");
+        function connect() {
+            var input = document.getElementById('textInput');
+            var errorMessage = document.getElementById('error-message');
 
-        ws.onopen = () => console.log("WebSocket connected.");
-        ws.onclose = () => console.log("WebSocket disconnected.");
-        ws.onerror = (error) => console.error("WebSocket error:", error);
+            if (input.value.trim() === '') {
+                errorMessage.textContent = "IP tidak boleh kosong!";
+                errorMessage.style.color = "#e74c3c";
+            } else {
+                if (typeof ws == 'undefined') {
+                    ws = new WebSocket("ws://" + document.getElementById('textInput').value);
+                    errorMessage.textContent = "Menghubungkan...";
+                    errorMessage.style.color = "#000000";
 
-        // State for button presses
+                    ws.onopen = () => {
+                        errorMessage.textContent = "Tersambung!";
+                        errorMessage.style.color = "#4ae73c";
+                        setTimeout(function () {
+                            document.getElementById('main').classList.remove('hidden');
+                            document.getElementById('start').classList.add('hidden');
+                        }, 1000);
+                    }
+                    ws.onclose = () => {
+                        errorMessage.textContent = "Gagal terkoneksi!";
+                        errorMessage.style.color = "#e74c3c";
+                    }
+                    ws.onerror = (error) => {
+                        errorMessage.textContent = "Error: " + error;
+                        errorMessage.style.color = "#e74c3c";
+                    }
+                }
+            }
+        }
+
         const buttonState = {
             left: {
                 up: false,
@@ -108,35 +215,33 @@
             speed: 180,
         };
 
-        // Update WebSocket with new state
         function sendState() {
             const data = {
                 data: buttonState
             };
-            if (ws.readyState === WebSocket.OPEN) {
-                ws.send(JSON.stringify(data));
-                console.log("Sent:", data);
-            } else {
-                console.error("WebSocket is not open.");
+            if (typeof ws != 'undefined') {
+                if (ws.readyState === WebSocket.OPEN) {
+                    ws.send(JSON.stringify(data));
+                } else {
+                    document.getElementById('main').classList.remove('hidden');
+                    document.getElementById('start').classList.add('hidden');
+                }
             }
         }
 
-        // Seekbar handler
         const seekbar = document.getElementById("seekbar");
         const seekbarValue = document.getElementById("seekbar-value");
         seekbar.addEventListener("input", () => {
             seekbarValue.textContent = seekbar.value;
             buttonState["speed"] = seekbar.value;
-            sendState(); // Update server when seekbar changes
+            sendState();
         });
 
-        // Individual button handlers
         const btnLeftUp = document.getElementById("btn-left-up");
         const btnLeftDown = document.getElementById("btn-left-down");
         const btnRightUp = document.getElementById("btn-right-up");
         const btnRightDown = document.getElementById("btn-right-down");
 
-        // Event functions
         function handlePress(button, name, stateKey, direction) {
             button.classList.add("active");
             buttonState[stateKey][direction] = true;
@@ -151,7 +256,6 @@
             sendState();
         }
 
-        // Assign events to buttons
         btnLeftUp.addEventListener("touchstart", () => handlePress(btnLeftUp, "Left Up", "left", "up"), {
             passive: true
         });
@@ -191,6 +295,16 @@
         btnRightDown.addEventListener("touchcancel", () => handleRelease(btnRightDown, "Right Down", "right", "down"), {
             passive: true
         });
+
+        window.addEventListener('beforeunload', function (event) {
+            if (typeof ws != 'undefined') {
+                if (ws.readyState === WebSocket.OPEN) {
+                    ws.close();
+                }
+            }
+        });
+
     </script>
 </body>
+
 </html>

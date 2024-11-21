@@ -181,7 +181,7 @@
             }
 
             if (window.WebSocket) {
-                ws = new WebSocket("wss://" + input.value);
+                ws = new WebSocket("ws://" + input.value);
 
                 errorMessage.textContent = "Menghubungkan...";
                 errorMessage.style.color = "#000000";

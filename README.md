@@ -22,7 +22,7 @@ Oleh:
    Copy board ESP8266 :
    >  ```http://arduino.esp8266.com/stable/package_esp8266com_index.json```
 
-   [Unduh driver CH340](https://sparks.gogo.co.nz/ch340.html)
+   [Unduh driver CH340 (jika dibutuhkan)](https://sparks.gogo.co.nz/ch340.html)
 
 5. Instal library WebSocket, JsonArduino, bersControlV1
 

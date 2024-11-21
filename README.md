@@ -49,50 +49,50 @@ bersControlV1 control;  // Objek bersControlV1 untuk komunikasi WebSocket
 
 // Fungsi yang menangani event WebSocket dan data yang diterima dari client
 void onEventBersControl(const BersSignal& data) {
-    // Mengecek jika status kode data adalah 0 (berarti data valid)
-    if (data.status.Code == 0) {
-      // Mengambil data dalam format JSON dari pesan yang diterima
-      JsonDocument jsonData = data.output.Json;
+  // Mengecek jika status kode data adalah 0 (berarti data valid)
+  if (data.status.Code == 0) {
+    // Mengambil data dalam format JSON dari pesan yang diterima
+    JsonDocument jsonData = data.output.Json;
 
-      // Mengambil status perintah untuk setiap motor dan kecepatan
-      bool LF_p = jsonData["data"]["left"]["up"].as<bool>();     // Status motor kiri depan (gerak maju)
-      bool LB_p = jsonData["data"]["left"]["down"].as<bool>();   // Status motor kiri belakang (gerak mundur)
-      bool RF_p = jsonData["data"]["right"]["up"].as<bool>();    // Status motor kanan depan (gerak maju)
-      bool RB_p = jsonData["data"]["right"]["down"].as<bool>();  // Status motor kanan belakang (gerak mundur)
-      int speed = jsonData["data"]["speed"].as<int>();           // Kecepatan motor (PWM)
+    // Mengambil status perintah untuk setiap motor dan kecepatan
+    bool LF_p = jsonData["data"]["left"]["up"].as<bool>();     // Status motor kiri depan (gerak maju)
+    bool LB_p = jsonData["data"]["left"]["down"].as<bool>();   // Status motor kiri belakang (gerak mundur)
+    bool RF_p = jsonData["data"]["right"]["up"].as<bool>();    // Status motor kanan depan (gerak maju)
+    bool RB_p = jsonData["data"]["right"]["down"].as<bool>();  // Status motor kanan belakang (gerak mundur)
+    int speed = jsonData["data"]["speed"].as<int>();           // Kecepatan motor (PWM)
 
-      // Mengatur kecepatan kedua motor (kiri dan kanan) berdasarkan data yang diterima
-      analogWrite(EA, speed);  // Motor kiri depan
-      analogWrite(EB, speed);  // Motor kanan depan
+    // Mengatur kecepatan kedua motor (kiri dan kanan) berdasarkan data yang diterima
+    analogWrite(EA, speed);  // Motor kiri depan
+    analogWrite(EB, speed);  // Motor kanan depan
 
-      // LF           RF
-      // LB           RB
-      //     |||||||    
+    // LF           RF
+    // LB           RB
+    //     |||||||    
 
-      // Mengontrol motor kanan depan dan belakang
-      if (RF_p && !RB_p) {
-        digitalWrite(RF, HIGH);  // Motor kanan depan maju
-        digitalWrite(RB, LOW);   // Motor kanan belakang berhenti
-      } else if (!RF_p && RB_p) {
-        digitalWrite(RF, LOW);   // Motor kanan depan berhenti
-        digitalWrite(RB, HIGH);  // Motor kanan belakang mundur
-      } else {
-        digitalWrite(RF, LOW);  // Mematikan motor kiri depan
-        digitalWrite(RB, LOW);  // Mematikan motor kiri belakang
-      }
-
-      // Mengontrol motor kiri depan dan belakang
-      if (LF_p && !LB_p) {
-        digitalWrite(LF, HIGH);  // Motor kiri depan maju
-        digitalWrite(LB, LOW);   // Motor kiri belakang berhenti
-      } else if (!LF_p && LB_p) {
-        digitalWrite(LF, LOW);   // Motor kiri depan berhenti
-        digitalWrite(LB, HIGH);  // Motor kiri belakang mundur
-      } else {
-        digitalWrite(LF, LOW);  // Mematikan motor kiri depan
-        digitalWrite(LB, LOW);  // Mematikan motor kiri belakang
-      }
+    // Mengontrol motor kanan depan dan belakang
+    if (RF_p && !RB_p) {
+      digitalWrite(RF, HIGH);  // Motor kanan depan maju
+      digitalWrite(RB, LOW);   // Motor kanan belakang berhenti
+    } else if (!RF_p && RB_p) {
+      digitalWrite(RF, LOW);   // Motor kanan depan berhenti
+      digitalWrite(RB, HIGH);  // Motor kanan belakang mundur
+    } else {
+      digitalWrite(RF, LOW);  // Mematikan motor kiri depan
+      digitalWrite(RB, LOW);  // Mematikan motor kiri belakang
     }
+
+    // Mengontrol motor kiri depan dan belakang
+    if (LF_p && !LB_p) {
+      digitalWrite(LF, HIGH);  // Motor kiri depan maju
+      digitalWrite(LB, LOW);   // Motor kiri belakang berhenti
+    } else if (!LF_p && LB_p) {
+      digitalWrite(LF, LOW);   // Motor kiri depan berhenti
+      digitalWrite(LB, HIGH);  // Motor kiri belakang mundur
+    } else {
+      digitalWrite(LF, LOW);  // Mematikan motor kiri depan
+      digitalWrite(LB, LOW);  // Mematikan motor kiri belakang
+    }
+  }
 }
 
 // Fungsi setup untuk inisialisasi hardware dan koneksi

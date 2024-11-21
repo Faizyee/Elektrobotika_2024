@@ -35,8 +35,22 @@ Politeknik Harapan Bersama Tegal
 ### Pemrograman
 
 ```ino
-void setup() {
+#include <bersControlV1.h>
 
+bersControlV1 control;
+
+void eventControl(const DataBers& data) {
+
+}
+
+void setup() {
+  control.begin("SSID", "PASSWORD");
+  control.setMaxClient(1);
+  control.onEvent(eventControl);
+}
+
+void loop() {
+  control.loop();
 }
 ```
 

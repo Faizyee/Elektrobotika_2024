@@ -57,3 +57,7 @@ void loop() {
 ### Rangkaian
 
 ![Rangkaian](https://github.com/Faizyee/Elektrobotika_2024/blob/fe2750ef85d2cade316f6d106fdc46b584f7e28b/sp.png)
+
+### Sistem Kontrol
+
+[Buka kontrol sekarang](https://faizyee.github.io/Elektrobotika_2024)

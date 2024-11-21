@@ -45,7 +45,7 @@ void eventControl(const BersSignal& data) {
 
 void setup() {
   control.begin("SSID", "PASSWORD");
-  control.setMaxClient(1);
+  control.setMaxConnect(1);
   control.onEvent(eventControl);
 }
 

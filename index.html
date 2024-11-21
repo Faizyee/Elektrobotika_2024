@@ -177,36 +177,41 @@
             if (input.value.trim() === '') {
                 errorMessage.textContent = "IP tidak boleh kosong!";
                 errorMessage.style.color = "#e74c3c";
-            } else {
-                if (typeof ws == 'undefined') {
-                    ws = new WebSocket("ws://" + document.getElementById('textInput').value);
-                    errorMessage.textContent = "Menghubungkan...";
-                    errorMessage.style.color = "#000000";
+                return;
+            }
 
-                    ws.onopen = () => {
-                        errorMessage.textContent = "Tersambung!";
-                        errorMessage.style.color = "#4ae73c";
-                        setTimeout(function () {
-                            if (typeof ws != 'undefined') {
-                                if (ws.readyState === WebSocket.OPEN) {
-                                    document.getElementById('main').classList.remove('hidden');
-                                    document.getElementById('start').classList.add('hidden');
-                                }
+            if (window.WebSocket) {
+                ws = new WebSocket("ws://" + input.value);
+
+                errorMessage.textContent = "Menghubungkan...";
+                errorMessage.style.color = "#000000";
+
+                ws.onopen = () => {
+                    errorMessage.textContent = "Tersambung!";
+                    errorMessage.style.color = "#4ae73c";
+                    setTimeout(function () {
+                        if (typeof ws != 'undefined') {
+                            if (ws.readyState === WebSocket.OPEN) {
+                                document.getElementById('main').classList.remove('hidden');
+                                document.getElementById('start').classList.add('hidden');
                             }
-                        },
-                            1000);
-                    }
-                    ws.onclose = () => {
-                        errorMessage.textContent = "Gagal terkoneksi!";
-                        errorMessage.style.color = "#e74c3c";
-                        ws = undefined;
-                    }
-                    ws.onerror = (error) => {
-                        errorMessage.textContent = "Error: " + error;
-                        errorMessage.style.color = "#e74c3c";
-                        ws = undefined;
-                    }
+                        }
+                    },
+                        1000);
                 }
+                ws.onclose = () => {
+                    errorMessage.textContent = "Gagal terkoneksi!";
+                    errorMessage.style.color = "#e74c3c";
+                    ws = undefined;
+                }
+                ws.onerror = (error) => {
+                    errorMessage.textContent = "Error: " + error;
+                    errorMessage.style.color = "#e74c3c";
+                    ws = undefined;
+                }
+            } else {
+                errorMessage.textContent = "WebSockets tidak didukung, menggunakan fallback.";
+                return;
             }
         }
 

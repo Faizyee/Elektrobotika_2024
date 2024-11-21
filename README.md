@@ -18,8 +18,8 @@ Politeknik Harapan Bersama Tegal
 
 3. Instal board ESP8266 dan driver CH340
 
-   > Copy board ESP8266 :
-   ```http://arduino.esp8266.com/stable/package_esp8266com_index.json```
+   Copy board ESP8266 :
+   >  ```http://arduino.esp8266.com/stable/package_esp8266com_index.json```
 
    [Download driver CH340](https://sparks.gogo.co.nz/ch340.html)
 

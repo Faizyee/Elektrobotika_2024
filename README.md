@@ -26,9 +26,9 @@ Politeknik Harapan Bersama Tegal
 
 5. Instal library WebSocket, JsonArduino, bersControlV1
 
-   - WebSocket instal di Arduino IDE
+   - WebSocketi unduh [disini](https://github.com/Links2004/arduinoWebSockets) atau di Arduino IDE
    
-   - JsonArduino instal di Arduino IDE
+   - JsonArduino unduh [disini](https://github.com/bblanchon/ArduinoJson) atau di Arduino IDE
    
    - bersControlV1 unduh [disini](https://github.com/Faizyee/BersControl/archive/refs/heads/main.zip)
 

@@ -10,6 +10,9 @@ Oleh:
 Politeknik Harapan Bersama Tegal
 
 ### Materi
+
+#### Instalasi
+
 1. Instal Arduino IDE
    
    [Download Arduino IDE (Windows)](https://downloads.arduino.cc/arduino-ide/arduino-ide_2.3.3_Windows_64bit.exe)
@@ -25,8 +28,10 @@ Politeknik Harapan Bersama Tegal
 
 5. Instal library WebSocket, JsonArduino, bersControlV1
 
-  - WebSocket instal di Arduino IDE
+   - WebSocket instal di Arduino IDE
    
-  - JsonArduino instal di Arduino IDE
+   - JsonArduino instal di Arduino IDE
    
-  - bersControlV1 instal [disini](https://github.com/Faizyee/BersControl/archive/refs/heads/main.zip)
+   - bersControlV1 instal [disini](https://github.com/Faizyee/BersControl/archive/refs/heads/main.zip)
+
+#### Bagian Utama

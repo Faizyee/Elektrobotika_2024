@@ -150,4 +150,4 @@ Data yang akan terkirim adalah:
 }
 ```
 
-[Buka kontrol sekarang](https://faizyee.github.io/Elektrobotika_2024)
+[Unduh kontrol sekarang](https://github.com/Faizyee/Elektrobotika_2024/blob/main/index.html)

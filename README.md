@@ -12,14 +12,21 @@ Politeknik Harapan Bersama Tegal
 ### Materi
 1. Instal Arduino IDE
    
-   https://www.arduino.cc/en/software
+   [Download Arduino IDE (Windows)](https://downloads.arduino.cc/arduino-ide/arduino-ide_2.3.3_Windows_64bit.exe)
+
+   [Versi Lainnya](https://www.arduino.cc/en/software)
 
 3. Instal board ESP8266 dan driver CH340
 
-   board ESP8266 : ```http://arduino.esp8266.com/stable/package_esp8266com_index.json```
+   > Copy board ESP8266 :
+   ```http://arduino.esp8266.com/stable/package_esp8266com_index.json```
 
-   driver CH340 : https://sparks.gogo.co.nz/ch340.html
+   [Download driver CH340](https://sparks.gogo.co.nz/ch340.html)
 
-4. Instal library WebSocket, JsonArduino, bersControlV1
+5. Instal library WebSocket, JsonArduino, bersControlV1
 
-   bersControlV1 : https://github.com/Faizyee/BersControl
+   - WebSocket instal di Arduino IDE
+   
+   - JsonArduino instal di Arduino IDE
+   
+   - bersControlV1 instal [disini](https://github.com/Faizyee/BersControl/archive/refs/heads/main.zip)

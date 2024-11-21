@@ -1,4 +1,4 @@
-![Elektrobotika 2024](https://github.com/Faizyee/Elektrobotika_2024/fp.png)
+![Elektrobotika 2024](https://github.com/Faizyee/Elektrobotika_2024/blob/a62c9610bb55eec299da8ea1fce67014cdcda204/fp.png)
 
 ## Elektrobotika 2024
 Workshop And Robotic Competition

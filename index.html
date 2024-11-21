@@ -197,21 +197,26 @@
                         errorMessage.style.color = "#4ae73c";
                         // Tampilkan bagian utama setelah koneksi
                         setTimeout(function () {
-                            document.getElementById('main').classList.remove('hidden');
-                            document.getElementById('start').classList.add('hidden');
-                        }, 1000);
+                            if (typeof ws != 'undefined') {
+                                document.getElementById('main').classList.remove('hidden');
+                                document.getElementById('start').classList.add('hidden');
+                            }
+                        },
+                            1000);
                     };
 
                     // Callback saat koneksi WebSocket terputus
                     ws.onclose = () => {
                         errorMessage.textContent = "Gagal terkoneksi!";
                         errorMessage.style.color = "#e74c3c";
+                        ws = undefined;
                     };
 
                     // Callback saat terjadi error di WebSocket
                     ws.onerror = (error) => {
                         errorMessage.textContent = "Error: " + error.message;
                         errorMessage.style.color = "#e74c3c";
+                        ws = undefined;
                     };
                 }
             }
@@ -219,14 +224,23 @@
 
         // Objek untuk menyimpan state tombol dan seekbar
         const buttonState = {
-            left: { up: false, down: false },
-            right: { up: false, down: false },
-            speed: 180, // Nilai awal speed dari seekbar
+            left: {
+                up: false,
+                down: false
+            },
+            right: {
+                up: false,
+                down: false
+            },
+            speed: 180,
+            // Nilai awal speed dari seekbar
         };
 
         // Fungsi untuk mengirim data state ke server
         function sendState() {
-            const data = { data: buttonState };
+            const data = {
+                data: buttonState
+            };
             if (typeof ws != 'undefined' && ws.readyState === WebSocket.OPEN) {
                 ws.send(JSON.stringify(data));
             }
@@ -261,18 +275,34 @@
         const btnRightUp = document.getElementById("btn-right-up");
         const btnRightDown = document.getElementById("btn-right-down");
 
-        btnLeftUp.addEventListener("touchstart", () => handlePress(btnLeftUp, "Left Up", "left", "up"), { passive: true });
-        btnLeftUp.addEventListener("touchend", () => handleRelease(btnLeftUp, "Left Up", "left", "up"), { passive: true });
+        btnLeftUp.addEventListener("touchstart", () => handlePress(btnLeftUp, "Left Up", "left", "up"), {
+            passive: true
+        });
+        btnLeftUp.addEventListener("touchend", () => handleRelease(btnLeftUp, "Left Up", "left", "up"), {
+            passive: true
+        });
 
         // Tambahkan event untuk tombol lainnya (mirip seperti btnLeftUp)
-        btnLeftDown.addEventListener("touchstart", () => handlePress(btnLeftDown, "Left Down", "left", "down"), { passive:true });
-btnLeftDown.addEventListener("touchend", () => handleRelease(btnLeftDown, "Left Down", "left", "down"), { passive: true });
+        btnLeftDown.addEventListener("touchstart", () => handlePress(btnLeftDown, "Left Down", "left", "down"), {
+            passive: true
+        });
+        btnLeftDown.addEventListener("touchend", () => handleRelease(btnLeftDown, "Left Down", "left", "down"), {
+            passive: true
+        });
 
-btnRightUp.addEventListener("touchstart", () => handlePress(btnRightUp, "Right Up", "right", "up"), { passive: true });
-btnRightUp.addEventListener("touchend", () => handleRelease(btnRightUp, "Right Up", "right", "up"), { passive: true });
+        btnRightUp.addEventListener("touchstart", () => handlePress(btnRightUp, "Right Up", "right", "up"), {
+            passive: true
+        });
+        btnRightUp.addEventListener("touchend", () => handleRelease(btnRightUp, "Right Up", "right", "up"), {
+            passive: true
+        });
 
-btnRightDown.addEventListener("touchstart", () => handlePress(btnRightDown, "Right Down", "right", "down"), { passive: true });
-btnRightDown.addEventListener("touchend", () => handleRelease(btnRightDown, "Right Down", "right", "down"), { passive: true });
+        btnRightDown.addEventListener("touchstart", () => handlePress(btnRightDown, "Right Down", "right", "down"), {
+            passive: true
+        });
+        btnRightDown.addEventListener("touchend", () => handleRelease(btnRightDown, "Right Down", "right", "down"), {
+            passive: true
+        });
     </script>
 </body>
 

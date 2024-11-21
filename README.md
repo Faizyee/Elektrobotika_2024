@@ -130,7 +130,7 @@ void loop() {
 ### Sistem Kontrol
 
 Data yang akan terkirim adalah:
-```json
+```js
 {
   data: {
     left: {

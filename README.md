@@ -128,4 +128,4 @@ void loop() {
 
 ### Sistem Kontrol
 
-![Buka kontrol sekarang](https://faizyee.github.io/Elektrobotika_2024)
+[Buka kontrol sekarang](https://faizyee.github.io/Elektrobotika_2024)

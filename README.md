@@ -4,10 +4,10 @@
 Workshop And Robotic Competition
 
 Oleh:
-- Elektronika
-- Robotika
+- D3 Teknik Elektronika
+- UKM Robotika
 
-Politeknik Harapan Bersama Tegal
+[Politeknik Harapan Bersama Tegal](https://www.poltekharber.ac.id)
 
 ## Materi
 

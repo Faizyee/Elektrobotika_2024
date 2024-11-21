@@ -13,7 +13,7 @@ Oleh:
 
 ### Microcontroller
 
-![Microcontroller NodeMCU ESP8266](https://images.app.goo.gl/aA1soqLw9ECKLMzb7)
+![Microcontroller NodeMCU ESP8266](https://raw.githubusercontent.com/AchimPieters/ESP8266-12F---Power-Mode/master/Node-MCU-Pinout.png)
 
 ### Instalasi
 

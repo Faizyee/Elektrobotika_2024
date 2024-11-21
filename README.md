@@ -39,8 +39,8 @@ Oleh:
 
 bersControlV1 control;
 
-void eventControl(const DataBers& data) {
-
+void eventControl(const BersSignal& data) {
+  //disini lakukan sesuatu
 }
 
 void setup() {

@@ -137,9 +137,9 @@ void loop() {
 ![Rangkaian](https://github.com/Faizyee/Elektrobotika_2024/blob/fe2750ef85d2cade316f6d106fdc46b584f7e28b/sp.png)
 
 
-### Sistem Kontrol
+### Sistem Kendali
 
-[Unduh sistem kontrol](https://raw.githubusercontent.com/Faizyee/Elektrobotika_2024/refs/heads/main/sistem_kontrol.html)
+[Unduh sistem kendali](https://raw.githubusercontent.com/Faizyee/Elektrobotika_2024/refs/heads/main/sistemKendali_Elektrobotika2024.html)
 
 Data yang akan terkirim adalah:
 ```js
